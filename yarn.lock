@@ -1916,6 +1916,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo/config-plugins@npm:^7.2.5":
+  version: 7.9.2
+  resolution: "@expo/config-plugins@npm:7.9.2"
+  dependencies:
+    "@expo/config-types": ^50.0.0-alpha.1
+    "@expo/fingerprint": ^0.6.0
+    "@expo/json-file": ~8.3.0
+    "@expo/plist": ^0.1.0
+    "@expo/sdk-runtime-versions": ^1.0.0
+    "@react-native/normalize-color": ^2.0.0
+    chalk: ^4.1.2
+    debug: ^4.3.1
+    find-up: ~5.0.0
+    getenv: ^1.0.0
+    glob: 7.1.6
+    resolve-from: ^5.0.0
+    semver: ^7.5.3
+    slash: ^3.0.0
+    slugify: ^1.6.6
+    xcode: ^3.0.1
+    xml2js: 0.6.0
+  checksum: cd3440558a6cb757626a21a945781bd1d43ed1b4ab268673c29a8eb2f6ed95217bf8a94b6093a0238c3ce6481c8c963598aab6334e10f72a594ce8d5b9f87505
+  languageName: node
+  linkType: hard
+
+"@expo/config-types@npm:^50.0.0-alpha.1":
+  version: 50.0.1
+  resolution: "@expo/config-types@npm:50.0.1"
+  checksum: f803730a5a56fb0b1ddc4385d7ac930935c88be4e5a5dfaa9b7733444ba4d6d784946ecdc1e414528e5f642a473ff01a1533b8c4174e87b35d15cdd88c96bf49
+  languageName: node
+  linkType: hard
+
 "@expo/config-types@npm:^51.0.0-unreleased":
   version: 51.0.0
   resolution: "@expo/config-types@npm:51.0.0"
@@ -1973,6 +2005,23 @@ __metadata:
     dotenv-expand: ~11.0.6
     getenv: ^1.0.0
   checksum: 4199b7a3e186de81a5ddae4966d1a60694c1f0b3b24c190b9e5a584d47fb98254c8597ed66808511c09b3ee2774284fc72e03fc69ad9ee79005a7cd470ef6787
+  languageName: node
+  linkType: hard
+
+"@expo/fingerprint@npm:^0.6.0":
+  version: 0.6.1
+  resolution: "@expo/fingerprint@npm:0.6.1"
+  dependencies:
+    "@expo/spawn-async": ^1.5.0
+    chalk: ^4.1.2
+    debug: ^4.3.4
+    find-up: ^5.0.0
+    minimatch: ^3.0.4
+    p-limit: ^3.1.0
+    resolve-from: ^5.0.0
+  bin:
+    fingerprint: bin/cli.js
+  checksum: 8398d466a232604b54fc1438ece486753f6e8e65933ab270377b6f8ed1c4409a886031f0dff56b7f34d17774f71f9fd800e6b78f79fedceb2a6d4a3fdd9f490d
   languageName: node
   linkType: hard
 
@@ -2115,7 +2164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/spawn-async@npm:^1.7.2":
+"@expo/spawn-async@npm:^1.5.0, @expo/spawn-async@npm:^1.7.2":
   version: 1.7.2
   resolution: "@expo/spawn-async@npm:1.7.2"
   dependencies:
@@ -2990,6 +3039,13 @@ __metadata:
     metro-config: ^0.80.3
     metro-runtime: ^0.80.3
   checksum: 547f879453fa16b0c07f098c9639b62d20b662b84c46eb0d76f82241ec8d88c54e07fcfaeb4ca20340f5697480866bb904929cd38cd3d6684ef2b5455c82aff7
+  languageName: node
+  linkType: hard
+
+"@react-native/normalize-color@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "@react-native/normalize-color@npm:2.1.0"
+  checksum: 8ccbd40b3c7629f1dc97b3e9aadd95fd3507fcf2e37535a6299a70436ab891c34cbdc4240b07380553d6e85dd909e23d5773b5be1da2906b026312e0b0768838
   languageName: node
   linkType: hard
 
@@ -4177,9 +4233,7 @@ __metadata:
     prettier: 2.8.8
     react: 18.2.0
     react-native: 0.74.1
-    react-native-ble-manager: ^11.5.3
-    react-native-safe-area-context: ^4.10.1
-    react-native-screens: ^3.31.1
+    react-native-ble-plx: ^3.1.2
     react-test-renderer: 18.2.0
     typescript: 5.0.4
   languageName: unknown
@@ -9743,15 +9797,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-freeze@npm:^1.0.0":
-  version: 1.0.4
-  resolution: "react-freeze@npm:1.0.4"
-  peerDependencies:
-    react: ">=17.0.0"
-  checksum: 6b4d93209dff04a1f25d9f8e0c56a9a8a80e7889e8e8267299f34449c7e41a9ab90cad24569d03dd7173b56b7496576dba68f71f1d4e5c8be72f0633023668bc
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0, react-is@npm:^18.2.0":
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
@@ -9773,35 +9818,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-ble-manager@npm:^11.5.3":
-  version: 11.5.3
-  resolution: "react-native-ble-manager@npm:11.5.3"
-  peerDependencies:
-    react-native: ">=0.60.0"
-  checksum: 1e69c4e19c19d1800dc4ac0656a254bc66b0fec7f0a93b710864054455331093e9851c7f46de48102837f945becf53fcfc4061dd106e629b7b23b0637eaf9fcb
-  languageName: node
-  linkType: hard
-
-"react-native-safe-area-context@npm:^4.10.1":
-  version: 4.10.1
-  resolution: "react-native-safe-area-context@npm:4.10.1"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: a0f31a66f0aba7050cfdc34512349f49dd65349d53407d461196fa70010f65aca7310212d5c7c47078745db6e02975a4d97881d0340160d40e0feb5a4a5d9de2
-  languageName: node
-  linkType: hard
-
-"react-native-screens@npm:^3.31.1":
-  version: 3.31.1
-  resolution: "react-native-screens@npm:3.31.1"
+"react-native-ble-plx@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "react-native-ble-plx@npm:3.1.2"
   dependencies:
-    react-freeze: ^1.0.0
-    warn-once: ^0.1.0
+    "@expo/config-plugins": ^7.2.5
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 1fc61cf7a223b3ef1c8000e74416c8953561c5fa0861557da43659db62a640e37fb51fbdc35dae810a665881a7aa9eeaf1873e90f67404b4dda53a672464a7fe
+  checksum: 6a35269d4e65c3b8a52469db9a628b4519f28fe4009f90c96ba017b84408d63751c708391901219ec0a4cac3c560defba4fa504ded0b8a4a4b5b2c8c307a1841
   languageName: node
   linkType: hard
 

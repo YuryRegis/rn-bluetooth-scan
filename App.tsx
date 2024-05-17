@@ -7,8 +7,10 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import {BleManager, Device, ScanCallbackType} from 'react-native-ble-plx';
 import {
   Button,
+  FlatList,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -23,6 +25,8 @@ import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+const bleManager = new BleManager();
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -51,7 +55,55 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
+  const [devicesList, setDevicesList] = React.useState<Device[]>([]);
+  const [isScanning, setIsScanning] = React.useState<boolean>(false);
   const isDarkMode = useColorScheme() === 'dark';
+
+  function scanDevices() {
+    setIsScanning(true);
+    bleManager.startDeviceScan(
+      null,
+      {callbackType: ScanCallbackType.FirstMatch},
+      (error, device) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+        const isDeviceInList = devicesList.some(dev => dev.id === device?.id);
+        if (device && !isDeviceInList) {
+          setDevicesList(devices => devices.concat(device));
+        }
+      },
+    );
+  }
+
+  function stopScan(devices?: Device[]) {
+    setIsScanning(false);
+    if (devices) {
+      setDevicesList(devices);
+    }
+    bleManager.stopDeviceScan();
+  }
+
+  function renderDeviceItem(deviceItem: Device) {
+    const title = deviceItem.name || deviceItem.localName || 'Desconhecido';
+    return (
+      <Section title={title} key={deviceItem.id}>
+        <View style={styles.sectionMainDescription}>
+          <Text>{`ID: ${deviceItem.id || 'desconhecido'}`}</Text>
+          <Text>{`RSSI: ${deviceItem.rssi || 'desconhecido'}`}</Text>
+          <Text>{`MTU: ${deviceItem.mtu || 'desconhecido'}`}</Text>
+          <Text>
+            {`txPowerLevel: ${deviceItem.txPowerLevel || 'desconhecido'}`}
+          </Text>
+        </View>
+      </Section>
+    );
+  }
+
+  const buttonMessage = !isScanning
+    ? 'Clique em "procurar" para listar os devices'
+    : 'Clique em "pausar" para encerrar a busca';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -70,19 +122,32 @@ function App(): React.JSX.Element {
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            ...styles.viewContainer,
           }}>
           <Section title="Bluetooth 'Hello World'">
-            <Button title="teste" />
-            <Button title="teste" />
+            <View style={styles.buttonContainer}>
+              <Button
+                title="procurar"
+                disabled={isScanning}
+                onPress={scanDevices}
+              />
+              <Button
+                title="pausar"
+                disabled={!isScanning}
+                onPress={() => stopScan()}
+              />
+            </View>
             <View style={styles.sectionMainDescription}>
-              <Text style={styles.sectionDescription}>
-                {"Clique em 'Teste' para listar os devices"}
-              </Text>
+              <Text style={styles.sectionDescription}>{buttonMessage}</Text>
             </View>
           </Section>
 
           <Section title="Devices">
-            Read the docs to discover what to do next:
+            <FlatList
+              data={devicesList}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => renderDeviceItem(item)}
+            />
           </Section>
         </View>
       </ScrollView>
@@ -91,9 +156,19 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  viewContainer: {
+    display: 'flex',
+    paddingHorizontal: 24,
+  },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24,
   },
   sectionTitle: {
     fontSize: 24,
